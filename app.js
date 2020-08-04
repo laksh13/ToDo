@@ -9,6 +9,8 @@ const deleteTask = document.querySelector(".delete-item");
 loadEventListeners();
 
 function loadEventListeners() {
+  //Load existing Tasks from Local Storage
+  document.addEventListener("DOMContentLoaded", loadTasksfromStorage);
   //Add task event
   form.addEventListener("submit", addTask);
   //Delete a Task
@@ -40,6 +42,8 @@ function addTask(e) {
     li.appendChild(link);
 
     taskList.appendChild(li);
+    //Store the task in Local Storage
+    addTaskToLocalStorage(taskInput.value);
     taskInput.value = "";
   }
 }
@@ -48,6 +52,8 @@ function clearTasks() {
   while (taskList.firstChild) {
     taskList.firstChild.remove();
     //taskList.removeChild();
+    //Remove all tasks from Local Storage
+    localStorage.removeItem("taskList");
   }
 }
 
@@ -56,6 +62,7 @@ function deleteTaskEvent(e) {
   if (target.parentNode.classList.contains("delete-item")) {
     target.parentNode.parentNode.remove();
   }
+  deleteTaskFromStorage(target.parentNode.parentNode.textContent);
   /* if (target.parentNode.className.indexOf("delete-item") != -1) {
     target.parentNode.parentNode.remove();
   } */
@@ -78,4 +85,46 @@ function filterTasks(e) {
       task.classList.add("displaying");
     } */
   });
+}
+
+function addTaskToLocalStorage(task) {
+  let tasks;
+  if (localStorage.getItem("taskList") === null) {
+    tasks = [];
+  } else {
+    tasks = JSON.parse(localStorage.getItem("taskList"));
+  }
+
+  tasks.push(task);
+  localStorage.setItem("taskList", JSON.stringify(tasks));
+}
+
+function loadTasksfromStorage() {
+  if (localStorage.getItem("taskList") !== null) {
+    let tasks = JSON.parse(localStorage.getItem("taskList"));
+    tasks.map((task) => {
+      const li = document.createElement("li");
+      li.className = "collection-item";
+
+      li.innerHTML = task;
+
+      const link = document.createElement("a");
+      link.className = "delete-item secondary-content";
+      link.innerHTML = '<i class="fa fa-remove"></i>';
+      li.appendChild(link);
+
+      taskList.appendChild(li);
+    });
+  }
+}
+
+function deleteTaskFromStorage(task) {
+  if (localStorage.getItem("taskList") !== null) {
+    let tasks = JSON.parse(localStorage.getItem("taskList"));
+    let pos = tasks.indexOf(task);
+    if (pos != -1) {
+      tasks.splice(pos, 1);
+    }
+    localStorage.setItem("taskList", JSON.stringify(tasks));
+  }
 }
