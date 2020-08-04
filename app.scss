@@ -2,4 +2,11 @@
   &.hide {
     display: none;
   }
+  &.completed{
+    text-decoration: line-through;
+  }
+}
+
+input[type="checkbox"]+span:not(.lever) {
+  height: 15px;
 }

@@ -1,4 +1,12 @@
 .collection-item.hide {
   display: none;
 }
+
+.collection-item.completed {
+  text-decoration: line-through;
+}
+
+input[type="checkbox"] + span:not(.lever) {
+  height: 15px;
+}
 /*# sourceMappingURL=app.css.map */
