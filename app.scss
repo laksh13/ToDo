@@ -1,5 +1,30 @@
+.hero{
+  width: 100%;
+  height: 100vh;
+  background-image: url(assets/Mataura.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  overflow: hidden;
+  //padding: 15vh 0;
+}
 .collection-item {
   &.hide {
     display: none;
   }
+}
+#task:focus,
+#filter:focus{
+  border-color: #673ab7;
+  box-shadow: 0 1px 0 0 #673ab7;
+}
+.container{
+  padding: 3rem 0;
+  height: 100%;
+  overflow-y: hidden;
+}
+.container > .row{
+  max-height: calc(100vh - 6rem);
+  overflow-y: auto;
 }
