@@ -13,6 +13,33 @@
   display: none;
 }
 
+.collection-item.completed {
+  text-decoration: line-through;
+}
+
+.collection-item i {
+  color: #F44336;
+  color: #673ab7;
+}
+
+.collection-item [type="checkbox"].filled-in:checked + span:not(.lever):after {
+  background-color: #673ab7;
+  border-color: #673ab7;
+}
+
+#task-form .btn {
+  background-color: #673ab7;
+}
+
+input[type="checkbox"] + span:not(.lever) {
+  height: 15px;
+}
+
+#task:focus + label,
+#filter:focus + label {
+  color: #673ab7;
+}
+
 #task:focus,
 #filter:focus {
   border-color: #673ab7;
