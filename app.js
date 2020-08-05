@@ -86,7 +86,7 @@ function actionTaskEvent(e) {
 function filterTasks(e) {
   const filterText = e.target.value.toLowerCase();
   document.querySelectorAll(".collection-item").forEach(function (task) {
-    const item = task.firstChild.textContent;
+    const item = task.textContent;
     if (item.toLowerCase().indexOf(filterText) != -1) {
       task.classList.remove("hide");
     } else {
